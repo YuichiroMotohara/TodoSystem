@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+.worklist1{text-align:left;}
+
+
+.page-header{
+	margin-top: 70px;
+}
+
+
+
+div#username{
+	float: right;
+	width: 120px
+}
+
+
+div#signup{
+	margin-top:40px;
+}
+
+
+
+
+div#search{
+	float:right;
+    margin-right:10px;
+    margin-bottom:30px
+}
+
+.title{
+	margin-top:100px;
+}
+
+
+div#update{
+
+	width:100px;
+}
+
+
+
+

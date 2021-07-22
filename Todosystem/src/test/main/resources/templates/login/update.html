@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8"></meta>
+ <!-- Bootstrapの設定 -->
+ <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet"></link>
+ <script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+ <script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+    <title>SignUp</title>
+</head>
+
+
+
+<body>
+
+ <div th:fragment="usersList_contents">
+  <div class="page-header">
+  <div class="col-sm-5">
+   <div class="page-header">
+     <h1>作業更新</h1>
+   </div>
+  </div>
+ </div>
+
+
+
+   <form method="post" action="/update" th:object="${signupForm}">
+     <table class="table table-bordered table-hover">
+
+     <tr>
+      <th class="active col-sm-3">項目名</th>
+      <td>
+       <div class="form-group">
+         <input type="text" class="form-control" th:field="*{Article}"/>
+       </div>
+      </td>
+     </tr>
+
+     <tr>
+      <th class="active">担当者</th>
+       <td>
+        <p>
+         <select th:field="*{usersName}"><option th:each="users2:${usersList}"
+         th:value="${users2.id}" th:text="${users2.user}"></option></select>
+        </p>
+      </td>
+     </tr>
+
+     <tr>
+      <th class="active">期限</th>
+       <td>
+        <div class="from-group">
+         <input type="text" class="form-control" th:field="*{Limited}"/>
+        </div>
+       </td>
+     </tr>
+
+     <tr>
+      <th class="active">終了</th>
+       <td>
+        <p><input type="checkbox" name="syuryo" value="終了した" th:field= "*{check}" >終了した</p>
+      </td>
+     </tr>
+
+
+
+     </table>
+      <ul>
+       <li th:each="error:${#fields.detailedErrors()}">
+        <span th:text="${error.message}">Error message</span>
+       </li>
+      </ul>
+
+       <button class="btn btn-primary" type="submit" name="update" value="更新">更新</button>
+       <input type="hidden" name="update" th:value="${signupForm.id}" th:field="*{id}" ></input>
+
+       <button class="btn btn-primary" type="submit" name="cancel">キャンセル</button>
+
+    </form>
+
+    </div>
+</body>
+
+</html>

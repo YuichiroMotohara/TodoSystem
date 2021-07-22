@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8"></meta>
+
+ <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet"></link>
+ <script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+ <script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+
+
+<title>Registration</title>
+</head>
+<body>
+ <div th:fragment="usersList_contents">
+  <div class ="page-header">
+   <div class="col-sm-5">
+   <div class="page-header">
+     <h1>ユーザー新規登録</h1>
+   </div>
+    </div>
+     </div>
+
+
+ <form method="post" action="/registration" th:object="${registrationForm}">
+     <table class="table table-bordered table-hover">
+
+     <tr>
+      <th class="active col-sm-3">ログインユーザー名</th>
+      <td>
+       <div class="form-group" th:classappend="${#fields.hasErrors('user')}?'has-error'">
+         <input type="text" class="form-control" th:field="*{user}"/>
+         <span class="text-danger" th:if="${#fields.hasErrors('user')}"
+          th:errors="*{user}">user error</span>
+       </div>
+      </td>
+     </tr>
+
+     <tr>
+       <th class="active">ログインパスワード</th>
+       <td>
+        <div class ="form-group" th:classappend="${#fields.hasErrors('password')}?'has-error'">
+         <input type="text" class ="form-control" th:field="*{password}"/>
+        <span class="text-danger" th:if="${#fields.hasErrors('password')}"
+         th:errors="*{password}">password error</span>
+        </div>
+      </td>
+     </tr>
+
+     <tr>
+      <th class="active">ユーザー姓</th>
+      <td>
+       <div class="from-group" th:classappend="${#fields.hasErrors('family_name')}?'has-error'">
+        <input type="text" class="form-control" th:field="*{family_name}"/>
+        <span class="text-danger" th:if="${#fields.hasErrors('family_name')}"
+         th:errors="*{family_name}">family_name error</span>
+       </div>
+      </td>
+     </tr>
+
+    <tr>
+      <th class="active">ユーザー名</th>
+      <td>
+       <div class="from-group"th:classappend="${#fields.hasErrors('first_name')}?'has-error'">
+        <input type="text" class="form-control" th:field="*{first_name}"/>
+        <span class="text-danger" th:if="${#fields.hasErrors('first_name')}"
+         th:errors="*{first_name}">first_name error</span>
+       </div>
+      </td>
+     </tr>
+
+
+
+
+
+
+     <tr>
+      <th class="active">管理者権限</th>
+      <td>
+       <div class="form-group" th:classappend="${#fields.hasErrors('role')}?'has-error'">
+        <div  th:each= "item:${radioRegistration}">
+         <input type="radio"  class="form-check-input"name="radioRegistration" th:text="${item.key}"
+         th:value="${item.value}" th:field="*{role}" th:checked="${item.key == 'role'}"></input>
+         </div>
+
+        </div>
+       </td>
+      </tr>
+     </table>
+
+
+     <button class="btn btn-primary" type="submit" name ="registration"> 登録</button>
+
+     <button class="btn btn-primary" type="submit" name ="cancel">キャンセル</button>
+     </form>
+    </div>
+ </body>
+</html>
+
+
+
+

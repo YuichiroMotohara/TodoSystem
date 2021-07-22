@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+<meta charset="UTF-8"></meta>
+
+<!-- Bootstrapの設定 -->
+<link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet"></link>
+<script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+
+<!-- CSSの読み込み -->
+<link th:href="@{/css/home.css}" rel="stylesheet"></link>
+
+<title>作業一覧</title>
+</head>
+<body>
+
+<!-- =====ヘッダー（ナビゲーションバー）　===== -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+ <div class="container-fluid">
+  <div class="navbar-header">
+   <a class="navbar-brand" href="#">Todo管理システム</a>
+  </div>
+  <form method="post" th:action="@{/logout}">
+   <button class="btn btn-link pull-right navbar-brand" type="submit">ログアウト</button>
+  </form>
+ </div>
+</nav>
+
+
+
+<!-- コンテンツ部分 -->
+<div th:fragment="workList_contents">
+ <div class="page-header">
+  <h1>作業一覧</h1>
+  </div>
+
+  <div>
+     <a class="btn btn-primary" th:href="@{'/signup'}">作業登録</a>
+  </div>
+
+  <form>
+  <div>
+    <input type="search" name="search" size="15" maxlength="20" placeholder="キーワード">
+    <input id="sbtn5" type="submit" value="検索"/>
+  </div>
+</form>
+
+
+ <table class="table table-bordered table-hover table-striped">
+  <tr>
+   <th class="info col-sm-2">項目名</th>
+   <th class="info col-sm-2">担当者</th>
+   <th class="info col-sm-2">期限</th>
+   <th class="info col-sm-2">完了</th>
+   <th class="info col-sm-2">操作</th>
+  </tr>
+  <tr th:each="todo:${todo_items}">
+   <td th:text="${todo.item_name}"></td>
+   <td th:text="${todo.user}"></td>
+   <td th:text="${#dates.format(todo.expire_date,'YYYY/MM/dd')}"></td>
+   <td th:text="${#dates.format(todo.finished_date,'YYYY/MM/dd')}"></td>
+   <td>
+     <button class="btn btn-primary btn-lg pull-right" type="submit" name="finish">完了</button>
+     <a class="btn btn-primary btn-lg pull-right" type="submit" th:href="@{'/Update/'+${todo.id}}">更新</a>
+     <a class="btn btn-danger btn-lg"  th:href="@{'/Delete/'+${todo.id}}">削除</a>
+    </td>
+    </tr>
+   </table>
+  </div>
+</body>
+</html>

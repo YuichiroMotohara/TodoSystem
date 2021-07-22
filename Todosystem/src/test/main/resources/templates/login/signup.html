@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8"></meta>
+ <!-- Bootstrapの設定 -->
+ <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet"></link>
+ <script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+ <script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+    <title>SignUp</title>
+</head>
+<body>
+
+ <div th:fragment="usersList_contents">
+  <div class="page-header">
+  <div class="col-sm-5">
+   <div class="page-header">
+     <h1>作業登録</h1>
+   </div>
+    </div>
+     </div>
+
+
+   <form method="post" action="/signup" th:object="${signupForm}">
+     <table class="table table-bordered table-hover">
+
+     <tr>
+      <th class="active col-sm-3">項目名</th>
+      <td>
+       <div class="form-group" th:classappend="${#fields.hasErrors('Article')}?'has-error'">
+         <input type="text" class="form-control" th:field="*{Article}"/>
+         <span class="text-danger" th:if="${#fields.hasErrors('Article')}"
+          th:errors="*{Article}">Article error</span>
+       </div>
+      </td>
+     </tr>
+
+
+
+
+     <tr>
+       <th class="active">担当者</th>
+       <td>
+        <p>
+        <select th:field="*{usersName}"><option th:each="user:${userList}"
+         th:value="${user.id}" th:text="${user.user}"></option></select>
+
+        </p>
+
+      </td>
+     </tr>
+
+
+     <tr>
+      <th class="active">期限</th>
+      <td>
+       <div class="form-group" th:classappend="${#fields.hasErrors('Limited')}?'has-error'">
+        <input type="text" class="form-control" th:field="*{Limited}"/>
+        <span class="text-danger" th:if="${#fields.hasErrors('Limited')}"
+          th:errors="*{Limited}">Limited error</span>
+       </div>
+      </td>
+     </tr>
+    </table>
+
+
+     <button class="btn btn-primary" type="submit" name ="registration"> 登録</button>
+
+
+     <button class="btn btn-primary" type="submit" name ="cancel">キャンセル</button>
+     </form>
+    </div>
+</body>
+</html>
