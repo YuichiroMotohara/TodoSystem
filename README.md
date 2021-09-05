@@ -4,6 +4,7 @@
 
 本システムは担当者ごとに担当するタスクを管理・共有するためのものです。
 開発言語はJavaで、フレームワークはSpringを使っております。レイアウトはCSSのフレームワークでBootstrapを使っております。
+Javaのポートフォリオで基本とされるCRUD機能（データの登録（Create）、読み出し（Read）、更新（Update）、削除（Delete））を備えた作りとなっております。
 
 １，Login画面からログインします。新規登録もこの画面からできます。
 ![login](https://user-images.githubusercontent.com/87798825/127274204-6c70e90b-3a01-40f0-bd89-46a6b8daab00.jpg)
